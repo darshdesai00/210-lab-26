@@ -18,6 +18,24 @@ int main() {
 
     cout << "*** DATA STRUCTURES RACES ***" << endl;
 
+
+    // Read Race
+    string code;
+    ifstream fin;
+    auto start = high_resolution_clock::now();
+    auto end = high_resolution_clock::now();
+
+    // Vector Read
+    fin.open("codes.txt")
+    start = high_resolution_clock::now();
+    while (fin >> code) {
+        vec.push_back(code);
+    }
+
+
+
+
+
     // testing out the chrono timing test
     auto start = high_resolution_clock::now();
 
