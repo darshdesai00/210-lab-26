@@ -31,26 +31,30 @@ int main() {
     while (fin >> code) {
         vec.push_back(code);
     }
+    end = high_resolution_clock::now();
+    auto vec_read = duration_cast<microseconds>(end - start).count();
+    fin.close();
 
-
-
-
-
-    // testing out the chrono timing test
-    auto start = high_resolution_clock::now();
-
-    // to test stopwatch
-    for (int i = 0; i < 100000; ++i) {
-        vec.push_back(to_string(i));
+    // List Read
+    fin.open("codes.txt")
+    start = high_resolution_clock::now();
+    while (fin >> code) {
+        lst.push_back(code);
     }
-    // ends the timing 
-    auto end = high_resolution_clock::now();
-    // sees how long the duration is
-    auto duration = duration_cast<microseconds>(end - start);
+    end = high_resolution_clock::now();
+    auto vec_read = duration_cast<microseconds>(end - start).count();
+    fin.close();
 
-    // output time in microseconds 
-    cout << "Example chrono check: " << duration.count()
-         << " microseconds" << endl;
+    // Set read
+    fin.open("codes.txt");
+    start = high_resolution_clock::now();
+    while (fin >> code) {
+    }
+    end = high_resolution_clock::now();
+    auto vec_read = duration_cast<microseconds>(end - start).count();
+    fin.close()
 
-    return 0;
-}
+
+    
+
+
