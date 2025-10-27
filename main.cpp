@@ -84,12 +84,12 @@ string newCode = "TESTCODE";
 
 // Vector Inset
 start = high_resolution_clock::now();
-vecinsert(vec.begin() + vec.size() / 2, newCode);
+vec.insert(vec.begin() + vec.size() / 2, newCode);
 end = high_resolution_clock::now();
 auto vec_insert = duration_cast<microseconds>(end - start).count();
 
 // List insert 
-auto it = lst.begin()
+auto it = lst.begin();
 advance(it, lst.size() / 2);
 start = high_resolution_clock::now();
 lst.insert(it, newCode);
@@ -100,7 +100,7 @@ auto lst_insert = duration_cast<microseconds>(end - start).count();
     start = high_resolution_clock::now();
     st.insert(newCode);
     end = high_resolution_clock::now();
-    auto set_insert = duration_cast<microseconds>(end  start).count();
+    auto set_insert = duration_cast<microseconds>(end - start).count();
 
     cout << left << setw(12) << "Insert"
          << setw(12) << vec_insert
@@ -109,6 +109,38 @@ auto lst_insert = duration_cast<microseconds>(end - start).count();
 
     cout << endl << "Insert race completed!" << endl;
 
-    return 0;
 
+// Delete Race
+
+// Vector delete (middle)
+start = high_resolution_clock::now();
+vec.erase(vec.begin() + vec.size() / 2);
+end = high_resolution_clock::now();
+auto vec_delete = duration_cast<microseconds>(end - start).count();
+
+// List delete (middle)
+it = lst.begin();
+advance(it, lst.size() / 2);
+start = high_resolution_clock::now();
+lst.erase(it);
+end = high_resolution_clock::now();
+auto lst_delete = duration_cast<microseconds>(end - start).count();
+
+// Set delete (middle)
+    auto sit = st.begin();
+    advance(sit, st.size() / 2);
+    start = high_resolution_clock::now();
+    st.erase(sit);
+    end = high_resolution_clock::now();
+    auto set_delete = duration_cast<microseconds>(end - start).count();
+
+    cout << left << setw(12) << "Delete"
+         << setw(12) << vec_delete
+         << setw(12) << lst_delete
+         << setw(12) << set_delete << endl;
+
+    cout << endl << "Delete race completed successfully!" << endl;
+
+    return 0;
 }
+
