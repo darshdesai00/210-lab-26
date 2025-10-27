@@ -75,4 +75,40 @@ int main() {
     cout << left << setw(12) << "Sort"
          << setw(12) << vec_sort
          << setw(12) << lst_sort
-         
+         << setw(12) << set_sort << endl;
+
+    
+
+// Insert Race
+string newCode = "TESTCODE";
+
+// Vector Inset
+start = high_resolution_clock::now();
+vecinsert(vec.begin() + vec.size() / 2, newCode);
+end = high_resolution_clock::now();
+auto vec_insert = duration_cast<microseconds>(end - start).count();
+
+// List insert 
+auto it = lst.begin()
+advance(it, lst.size() / 2);
+start = high_resolution_clock::now();
+lst.insert(it, newCode);
+end = high_resolution_clock::now();
+auto lst_insert = duration_cast<microseconds>(end - start).count();
+
+// Set insert 
+    start = high_resolution_clock::now();
+    st.insert(newCode);
+    end = high_resolution_clock::now();
+    auto set_insert = duration_cast<microseconds>(end  start).count();
+
+    cout << left << setw(12) << "Insert"
+         << setw(12) << vec_insert
+         << setw(12) << lst_insert
+         << setw(12) << set_insert << endl;
+
+    cout << endl << "Insert race completed!" << endl;
+
+    return 0;
+
+}
