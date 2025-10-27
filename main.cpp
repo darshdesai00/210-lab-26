@@ -107,26 +107,20 @@ auto lst_insert = duration_cast<microseconds>(end - start).count();
          << setw(12) << lst_insert
          << setw(12) << set_insert << endl;
 
-    cout << endl << "Insert race completed!" << endl;
 
+    // Delete Race 
+    start = high_resolution_clock::now();
+    vec.erase(vec.begin() + vec.size() / 2);
+    end = high_resolution_clock::now();
+    auto vec_delete = duration_cast<microseconds>(end - start).count();
 
-// Delete Race
+    it = lst.begin();
+    advance(it, lst.size() / 2);
+    start = high_resolution_clock::now();
+    lst.erase(it);
+    end = high_resolution_clock::now();
+    auto lst_delete = duration_cast<microseconds>(end - start).count();
 
-// Vector delete (middle)
-start = high_resolution_clock::now();
-vec.erase(vec.begin() + vec.size() / 2);
-end = high_resolution_clock::now();
-auto vec_delete = duration_cast<microseconds>(end - start).count();
-
-// List delete (middle)
-it = lst.begin();
-advance(it, lst.size() / 2);
-start = high_resolution_clock::now();
-lst.erase(it);
-end = high_resolution_clock::now();
-auto lst_delete = duration_cast<microseconds>(end - start).count();
-
-// Set delete (middle)
     auto sit = st.begin();
     advance(sit, st.size() / 2);
     start = high_resolution_clock::now();
@@ -139,8 +133,10 @@ auto lst_delete = duration_cast<microseconds>(end - start).count();
          << setw(12) << lst_delete
          << setw(12) << set_delete << endl;
 
-    cout << endl << "Delete race completed successfully!" << endl;
-
+    cout << "\nAll races complete!" << endl;
+    
     return 0;
 }
+
+
 
