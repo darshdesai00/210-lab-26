@@ -11,52 +11,44 @@ using namespace std;
 using namespace std::chrono;
 
 int main() {
-    // test containrs for read timings 
+    // test containrs for read timings
     vector<string> vec;
     list<string> lst;
     set<string> st;
 
     cout << "*** DATA STRUCTURES RACES ***" << endl;
 
-     cout << left << setw(12) << "Operation"
+    cout << left << setw(12) << "Operation"
          << setw(12) << "Vector"
          << setw(12) << "List"
          << setw(12) << "Set" << endl;
 
-    // Read Race
+    // Read race 
     string code;
     ifstream fin;
-    auto start = high_resolution_clock::now();
-    auto end = high_resolution_clock::now();
 
     // Vector Read
     fin.open("codes.txt");
-    start = high_resolution_clock::now();
-    while (fin >> code) {
-        vec.push_back(code);
-    }
-    end = high_resolution_clock::now();
+    auto start = high_resolution_clock::now();
+    while (fin >> code) vec.push_back(code);
+    auto end = high_resolution_clock::now();
     auto vec_read = duration_cast<microseconds>(end - start).count();
     fin.close();
 
     // List Read
     fin.open("codes.txt");
     start = high_resolution_clock::now();
-    while (fin >> code) {
-        lst.push_back(code);
-    }
+    while (fin >> code) lst.push_back(code);
     end = high_resolution_clock::now();
-    auto vec_read = duration_cast<microseconds>(end - start).count();
+    auto lst_read = duration_cast<microseconds>(end - start).count();
     fin.close();
 
     // Set read
     fin.open("codes.txt");
     start = high_resolution_clock::now();
-    while (fin >> code) {
-        st.insert(code);
-    }
+    while (fin >> code) st.insert(code);
     end = high_resolution_clock::now();
-    auto vec_read = duration_cast<microseconds>(end - start).count();
+    auto set_read = duration_cast<microseconds>(end - start).count();
     fin.close();
 
     // Display timing results
@@ -65,9 +57,7 @@ int main() {
          << setw(12) << lst_read
          << setw(12) << set_read << endl;
 
-
     cout << endl << "Success" << endl;
 
     return 0;
-
 }
