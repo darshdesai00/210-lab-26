@@ -57,7 +57,22 @@ int main() {
          << setw(12) << lst_read
          << setw(12) << set_read << endl;
 
-    cout << endl << "Success" << endl;
 
-    return 0;
-}
+    // Sort Race
+    start = high_resolution_clock::now();
+    sort(vec.begin(), vec.end());
+    end = high_resolution_clock::now();
+    auto vec_sort = duration_cast<microseconds>(end - start).count();
+
+    start = high_resolution_clock::now();
+    lst.sort();
+    end = high_resolution_clock::now();
+    auto lst_sort = duration_cast<microseconds>(end - start).count();
+
+    // The set is already sorted by definition
+    int set_sort = -1;
+
+    cout << left << setw(12) << "Sort"
+         << setw(12) << vec_sort
+         << setw(12) << lst_sort
+         
