@@ -14,26 +14,28 @@ using namespace std::chrono;
 const int NUM_RUNS = 15;
 const int NUM_OPER = 4;
 const int NUM_STRUCT = 3;
+const string DATA_FILE = "codes.txt";
 
 int main() {
-    // test containrs for read timings
+//
+long long results[NUM_RUNS][NUM_OPER][NUM_STRUCT] = {0};
+
+cout << "*** DATA STRUCTURES RACES (Milestone 2) ***\n";
+cout << "Running " << NUM_RUNS << " simulations...\n\n";
+
+for (int r = 0; r < NUM_RUNS; r++) {
+    // fresh containers each run
     vector<string> vec;
     list<string> lst;
-    set<string> st;
-
-    cout << "*** DATA STRUCTURES RACES ***" << endl;
-
-    cout << left << setw(12) << "Operation"
-         << setw(12) << "Vector"
-         << setw(12) << "List"
-         << setw(12) << "Set" << endl;
+    set<string>  st;
 
     // Read race 
     string code;
     ifstream fin;
 
     // Vector Read
-    fin.open("codes.txt");
+    fin.open(DATA_FILE);
+    if (!fin) { cerr << "Error: Couldnt open" << DATA_FILE << " for vector.\n'; return 1; }"}
     auto start = high_resolution_clock::now();
     while (fin >> code) vec.push_back(code);
     auto end = high_resolution_clock::now();
@@ -41,7 +43,8 @@ int main() {
     fin.close();
 
     // List Read
-    fin.open("codes.txt");
+    fin.open("DATA_FILE");
+    if (!fin) { cerr << "Error: Couldnt open" << DATA_FILE << " for list.\n'; return 1; }"}
     start = high_resolution_clock::now();
     while (fin >> code) lst.push_back(code);
     end = high_resolution_clock::now();
@@ -49,18 +52,13 @@ int main() {
     fin.close();
 
     // Set read
-    fin.open("codes.txt");
+    fin.open(DATA_FILE);
+    if (!fin) { cerr << "Error: Couldnt open" << DATA_FILE << " for set.\n'; return 1; }"}
     start = high_resolution_clock::now();
     while (fin >> code) st.insert(code);
     end = high_resolution_clock::now();
     auto set_read = duration_cast<microseconds>(end - start).count();
     fin.close();
-
-    // Display timing results
-    cout << left << setw(12) << "Read"
-         << setw(12) << vec_read
-         << setw(12) << lst_read
-         << setw(12) << set_read << endl;
 
 
     // Sort Race
