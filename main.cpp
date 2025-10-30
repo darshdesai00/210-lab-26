@@ -10,6 +10,11 @@
 using namespace std;
 using namespace std::chrono;
 
+// adding constants
+const int NUM_RUNS = 15;
+const int NUM_OPER = 4;
+const int NUM_STRUCT = 3;
+
 int main() {
     // test containrs for read timings
     vector<string> vec;
