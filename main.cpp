@@ -35,7 +35,7 @@ for (int r = 0; r < NUM_RUNS; r++) {
 
     // Vector Read
     fin.open(DATA_FILE);
-    if (!fin) { cerr << "Error: Couldnt open" << DATA_FILE << " for vector.\n'; return 1; "}
+    if (!fin) {cerr << "Error: Couldnt open " << DATA_FILE << " for vector .\n"; return 1;}
     auto start = high_resolution_clock::now();
     while (fin >> code) vec.push_back(code);
     auto end = high_resolution_clock::now();
@@ -43,8 +43,8 @@ for (int r = 0; r < NUM_RUNS; r++) {
     fin.close();
 
     // List Read
-    fin.open("DATA_FILE");
-    if (!fin) { cerr << "Error: Couldnt open" << DATA_FILE << " for list.\n'; return 1; }"}
+    fin.open(DATA_FILE);
+    if (!fin) {cerr << "Error: Couldnt open " << DATA_FILE << " for list .\n"; return 1;}
     start = high_resolution_clock::now();
     while (fin >> code) lst.push_back(code);
     end = high_resolution_clock::now();
@@ -53,7 +53,7 @@ for (int r = 0; r < NUM_RUNS; r++) {
 
     // Set read
     fin.open(DATA_FILE);
-    if (!fin) { cerr << "Error: Couldnt open" << DATA_FILE << " for set.\n'; return 1; }"}
+    if (!fin) {cerr << "Error: Couldnt open " << DATA_FILE << " for set .\n"; return 1;}
     start = high_resolution_clock::now();
     while (fin >> code) st.insert(code);
     end = high_resolution_clock::now();
@@ -66,12 +66,12 @@ for (int r = 0; r < NUM_RUNS; r++) {
     start = high_resolution_clock::now();
     sort(vec.begin(), vec.end());
     end = high_resolution_clock::now();
-    results[r][1][2] = duration_cast<microseconds>(end - start).count();
+    results[r][1][0] = duration_cast<microseconds>(end - start).count();
 
     start = high_resolution_clock::now();
     lst.sort();
     end = high_resolution_clock::now();
-    results[r][1][2] = duration_cast<microseconds>(end - start).count();
+    results[r][1][1] = duration_cast<microseconds>(end - start).count();
     
     // The set is already sorted by definition
     results[r][1][2] = -1;
@@ -121,11 +121,11 @@ results[r][2][2] = duration_cast<microseconds>(end - start).count();
     end = high_resolution_clock::now();
     results[r][3][2] = duration_cast<microseconds>(end - start).count();
 
-    
+}
     cout << "\nAll races complete!" << endl;
-    
     return 0;
 }
+
 
 
 
