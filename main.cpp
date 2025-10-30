@@ -35,7 +35,7 @@ for (int r = 0; r < NUM_RUNS; r++) {
 
     // Vector Read
     fin.open(DATA_FILE);
-    if (!fin) { cerr << "Error: Couldnt open" << DATA_FILE << " for vector.\n'; return 1; }"}
+    if (!fin) { cerr << "Error: Couldnt open" << DATA_FILE << " for vector.\n'; return 1; "}
     auto start = high_resolution_clock::now();
     while (fin >> code) vec.push_back(code);
     auto end = high_resolution_clock::now();
@@ -61,27 +61,22 @@ for (int r = 0; r < NUM_RUNS; r++) {
     fin.close();
 
 
+
     // Sort Race
     start = high_resolution_clock::now();
     sort(vec.begin(), vec.end());
     end = high_resolution_clock::now();
-    auto vec_sort = duration_cast<microseconds>(end - start).count();
+    results[r][1][2] = duration_cast<microseconds>(end - start).count();
 
     start = high_resolution_clock::now();
     lst.sort();
     end = high_resolution_clock::now();
-    auto lst_sort = duration_cast<microseconds>(end - start).count();
-
+    results[r][1][2] = duration_cast<microseconds>(end - start).count();
+    
     // The set is already sorted by definition
-    int set_sort = -1;
-
-    cout << left << setw(12) << "Sort"
-         << setw(12) << vec_sort
-         << setw(12) << lst_sort
-         << setw(12) << set_sort << endl;
+    results[r][1][2] = -1;
 
     
-
 // Insert Race
 string newCode = "TESTCODE";
 
@@ -89,7 +84,7 @@ string newCode = "TESTCODE";
 start = high_resolution_clock::now();
 vec.insert(vec.begin() + vec.size() / 2, newCode);
 end = high_resolution_clock::now();
-auto vec_insert = duration_cast<microseconds>(end - start).count();
+results[r][2][0] = duration_cast<microseconds>(end - start).count();
 
 // List insert 
 auto it = lst.begin();
@@ -97,45 +92,36 @@ advance(it, lst.size() / 2);
 start = high_resolution_clock::now();
 lst.insert(it, newCode);
 end = high_resolution_clock::now();
-auto lst_insert = duration_cast<microseconds>(end - start).count();
+results[r][2][1] = duration_cast<microseconds>(end - start).count();
 
 // Set insert 
-    start = high_resolution_clock::now();
-    st.insert(newCode);
-    end = high_resolution_clock::now();
-    auto set_insert = duration_cast<microseconds>(end - start).count();
-
-    cout << left << setw(12) << "Insert"
-         << setw(12) << vec_insert
-         << setw(12) << lst_insert
-         << setw(12) << set_insert << endl;
+start = high_resolution_clock::now();
+st.insert(newCode);
+end = high_resolution_clock::now();
+results[r][2][2] = duration_cast<microseconds>(end - start).count();
 
 
     // Delete Race 
     start = high_resolution_clock::now();
     vec.erase(vec.begin() + vec.size() / 2);
     end = high_resolution_clock::now();
-    auto vec_delete = duration_cast<microseconds>(end - start).count();
+    results[r][3][0] = duration_cast<microseconds>(end - start).count();
 
     it = lst.begin();
     advance(it, lst.size() / 2);
     start = high_resolution_clock::now();
     lst.erase(it);
     end = high_resolution_clock::now();
-    auto lst_delete = duration_cast<microseconds>(end - start).count();
+    results[r][3][1] = duration_cast<microseconds>(end - start).count();
 
     auto sit = st.begin();
     advance(sit, st.size() / 2);
     start = high_resolution_clock::now();
     st.erase(sit);
     end = high_resolution_clock::now();
-    auto set_delete = duration_cast<microseconds>(end - start).count();
+    results[r][3][2] = duration_cast<microseconds>(end - start).count();
 
-    cout << left << setw(12) << "Delete"
-         << setw(12) << vec_delete
-         << setw(12) << lst_delete
-         << setw(12) << set_delete << endl;
-
+    
     cout << "\nAll races complete!" << endl;
     
     return 0;
