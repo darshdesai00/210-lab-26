@@ -17,7 +17,12 @@ const int NUM_STRUCT = 3;
 const string DATA_FILE = "codes.txt";
 
 int main() {
-//
+
+
+// results[run][operation][structure]
+// run: 0–14
+// operation: 0=Read, 1=Sort, 2=Insert, 3=Delete
+// structure: 0=Vector, 1=List, 2=Set
 long long results[NUM_RUNS][NUM_OPER][NUM_STRUCT] = {0};
 
 cout << "*** DATA STRUCTURES RACES (Milestone 2) ***\n";
@@ -59,6 +64,11 @@ for (int r = 0; r < NUM_RUNS; r++) {
     end = high_resolution_clock::now();
     auto set_read = duration_cast<microseconds>(end - start).count();
     fin.close();
+
+    // belows stores the read results into the 3D array
+     results[r][0][0] = vec_read;
+     results[r][0][1] = lst_read;
+     results[r][0][2] = set_read;
 
 
 
@@ -120,6 +130,8 @@ results[r][2][2] = duration_cast<microseconds>(end - start).count();
     st.erase(sit);
     end = high_resolution_clock::now();
     results[r][3][2] = duration_cast<microseconds>(end - start).count();
+
+    cout << "Run " << r + 1 << " complete." << endl;
 
 }
     cout << "\nAll races complete!" << endl;
