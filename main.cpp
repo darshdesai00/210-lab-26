@@ -136,20 +136,37 @@ results[r][2][2] = duration_cast<microseconds>(end - start).count();
 // below is that average array to store the mean times
 long long avg[NUM_OPER][NUM_STRUCT] = {0};
 
-// below computes averages
+// compute averages
 for (int op = 0; op < NUM_OPER; op++) {
     for (int ds = 0; ds < NUM_STRUCT; ds++) {
         long long sum = 0;
         for (int r = 0; r < NUM_RUNS; r++) {
-            sum +=
+            sum += results[r][op][ds];
+        }
+        avg[op][ds] = sum / NUM_RUNS;
+    }
+}
 
+
+
+// below prints the final formatted results
+cout << "\nNumber of simulations: " << NUM_RUNS << endl;
+cout << left << setw(12) << "Operation"
+     << setw(12) << "Vector"
+     << setw(12) << "List"
+     << setw(12) << "Set" << endl;
+
+string operations[NUM_OPER] = {"Read", "Sort", "Insert", "Delete"};
+for (int op = 0; op < NUM_OPER; op++) {
+    cout << setw(12) << operations[op];
+    for (int ds = 0; ds < NUM_STRUCT; ds++) {
+        cout << setw(12) << avg[op][ds];
+    }
+    cout << endl;
+}
 
 
 
 cout << "\nAll races complete!" << endl;
     return 0;
 }
-
-
-
-
