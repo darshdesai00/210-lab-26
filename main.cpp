@@ -25,8 +25,6 @@ int main() {
 // structure: 0=Vector, 1=List, 2=Set
 long long results[NUM_RUNS][NUM_OPER][NUM_STRUCT] = {0};
 
-cout << "*** DATA STRUCTURES RACES (Milestone 2) ***\n";
-cout << "Running " << NUM_RUNS << " simulations...\n\n";
 
 for (int r = 0; r < NUM_RUNS; r++) {
     // fresh containers each run
@@ -131,10 +129,24 @@ results[r][2][2] = duration_cast<microseconds>(end - start).count();
     end = high_resolution_clock::now();
     results[r][3][2] = duration_cast<microseconds>(end - start).count();
 
-    cout << "Run " << r + 1 << " complete." << endl;
-
 }
-    cout << "\nAll races complete!" << endl;
+    
+
+
+// below is that average array to store the mean times
+long long avg[NUM_OPER][NUM_STRUCT] = {0};
+
+// below computes averages
+for (int op = 0; op < NUM_OPER; op++) {
+    for (int ds = 0; ds < NUM_STRUCT; ds++) {
+        long long sum = 0;
+        for (int r = 0; r < NUM_RUNS; r++) {
+            sum +=
+
+
+
+
+cout << "\nAll races complete!" << endl;
     return 0;
 }
 
